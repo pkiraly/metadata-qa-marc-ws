@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 /**
- * QA Catalogueweb service
+ * QA Catalogue web service
  */
 @SpringBootApplication
 @RestController
@@ -35,7 +35,6 @@ public class App {
 
     @PostMapping("/validate")
     public String validate(
-
       @RequestParam(value = "marcVersion", defaultValue = "MARC21", required = false) String marcVersion,
       @RequestParam(value = "marcFormat", defaultValue = "XML", required = false) String marcFormat,
       @RequestParam(value = "details", defaultValue = "true", required = false) boolean details,

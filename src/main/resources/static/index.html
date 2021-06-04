@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="/validate" method="POST" enctype="multipart/form-data">
+    <fieldset>
+        <legend>MARC version</legend>
+        <input type="radio" name="marcVersion" id="MARC21" value="MARC21" checked="checked"><label for="MARC21">MARC21</label></input><br/>
+        <input type="radio" name="marcVersion" id="BL" value="BL"><label for="BL">British Library</label></input><br/>
+        <input type="radio" name="marcVersion" id="DNB" value="DNB"><label for="DNB">Deutsche Nationalbibliothek</label></input><br/>
+        <input type="radio" name="marcVersion" id="FENNICA" value="FENNICA"><label for="FENNICA">National Library of Finland</label></input><br/>
+        <input type="radio" name="marcVersion" id="GENT" value="GENT"><label for="GENT">Universiteitsbibliotheek Gent</label></input><br/>
+        <input type="radio" name="marcVersion" id="NKCR" value="NKCR"><label for="NKCR">National Library of the Czech Republic</label></input><br/>
+        <input type="radio" name="marcVersion" id="OCLC" value="OCLC"><label for="OCLC">OCLC</label></input><br/>
+        <input type="radio" name="marcVersion" id="SZTE" value="SZTE"><label for="SZTE">Szegedi Tudományegyetem</label></input><br/>
+        <input type="radio" name="marcVersion" id="MARC21NO" value="MARC21NO"><label for="MARC21NO">MARC21 profile for Norwegian public libraries</label></input><br/>
+    </fieldset>
+    <fieldset>
+        <legend>MARC file format</legend>
+        <input type="radio" name="marcFormat" id="ISO" value="ISO" checked="checked"><label for="ISO">ISO</label></input>
+        <input type="radio" name="marcFormat" id="XML" value="XML"><label for="XML">MARC XML</label></input>
+        <input type="radio" name="marcFormat" id="ALEPHSEQ" value="ALEPHSEQ"><label for="ALEPHSEQ">ALEPHSEQ</label></input>
+        <input type="radio" name="marcFormat" id="LINE_SEPARATED" value="LINE_SEPARATED"><label for="LINE_SEPARATED">Line separated</label></input>
+    </fieldset>
+    <fieldset>
+        <legend>default record type</legend>
+        <input type="radio" name="defaultRecordType" id="BOOKS" value="BOOKS" checked="checked"><label for="BOOKS">Books</label></input>
+        <input type="radio" name="defaultRecordType" id="CONTINUING_RESOURCES" value="CONTINUING_RESOURCES"><label for="CONTINUING_RESOURCES">Continuing Resources</label></input>
+        <input type="radio" name="defaultRecordType" id="MUSIC" value="MUSIC"><label for="MUSIC">Music</label></input>
+        <input type="radio" name="defaultRecordType" id="MAPS" value="MAPS"><label for="MAPS">Maps</label></input>
+        <input type="radio" name="defaultRecordType" id="VISUAL_MATERIALS" value="VISUAL_MATERIALS"><label for="VISUAL_MATERIALS">Visual Materials</label></input>
+        <input type="radio" name="defaultRecordType" id="COMPUTER_FILES" value="COMPUTER_FILES"><label for="COMPUTER_FILES">Computer Files</label></input>
+        <input type="radio" name="defaultRecordType" id="MIXED_MATERIALS" value="MIXED_MATERIALS"><label for="MIXED_MATERIALS">Mixed Materials</label></input>
+        <p>The record type when the correspondent fields are missing or contain invalid values</p>
+    </fieldset>
+    <fieldset>
+        <legend>report format</legend>
+        <input type="radio" name="outputFormat" id="tsv" value="tsv" checked="checked"><label for="tsv">tab separated</label></input>
+        <input type="radio" name="outputFormat" id="csv" value="csv"><label for="csv">comma separated</label></input>
+        <input type="radio" name="outputFormat" id="txt" value="txt"><label for="txt">simple text</label></input>
+        <input type="radio" name="outputFormat" id="json" value="json"><label for="json">JSON</label></input>
+    </fieldset>
+
+    <fieldset>
+        <legend>default record type</legend>
+        <input type="checkbox" name="details" value="true">details</input>
+        <input type="checkbox" name="trimId" value="true">trim IDs in the report?</input>
+        <input type="checkbox" name="summary" value="true">summary</input>
+    </fieldset>
+    <fieldset>
+        <legend>file to validate</legend>
+        <input type="file" name="file" />
+    </fieldset>
+
+    <input type="submit" value="VALIDATE" />
+</form>
+
+</body>
+</html>
