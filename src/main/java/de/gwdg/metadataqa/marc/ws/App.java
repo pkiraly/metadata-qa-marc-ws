@@ -4,6 +4,8 @@ import de.gwdg.metadataqa.marc.cli.Validator;
 import de.gwdg.metadataqa.marc.cli.parameters.ValidatorParameters;
 import de.gwdg.metadataqa.marc.cli.utils.RecordIterator;
 import de.gwdg.metadataqa.marc.definition.DataSource;
+import de.gwdg.metadataqa.marc.model.validation.ValidationError;
+import de.gwdg.metadataqa.marc.model.validation.ValidationErrorFormatter;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * QA Catalogue web service
@@ -76,6 +79,22 @@ public class App {
         RecordIterator iterator = new RecordIterator(validator);
         iterator.start();
 
-        return String.format("validate!" + validator.getCounter());
+        StringBuffer sb = new StringBuffer();
+        sb.append(String.format("validated! counted: %d, processed records: %d\n", validator.getCounter(), validator.getNumberOfprocessedRecords()));
+        List<ValidationError> errors = validator.getAllValidationErrors();
+        sb.append(String.format("number of errors: %d\n", errors.size()));
+        if (errors.size() > 0) {
+            String header = ValidationErrorFormatter.formatHeaderForCollector(params.getFormat());
+            if (!header.equals(""))
+                sb.append(header + "\n");
+
+            for (ValidationError error : errors) {
+                String formatted = ValidationErrorFormatter.format(error, params.getFormat());
+                System.err.println(formatted);
+                sb.append(formatted + "\n");
+            }
+        }
+
+        return sb.toString();
     }
 }
