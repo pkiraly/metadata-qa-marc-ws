@@ -5,6 +5,7 @@ import de.gwdg.metadataqa.marc.cli.parameters.ValidatorParameters;
 import de.gwdg.metadataqa.marc.cli.utils.RecordIterator;
 import de.gwdg.metadataqa.marc.definition.DataSource;
 import org.apache.commons.cli.ParseException;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * QA Catalogue web service
@@ -44,6 +47,7 @@ public class App {
       @RequestParam(value = "defaultRecordType", defaultValue = "BOOKS", required = false) String defaultRecordType,
       @RequestParam(value = "detailsFileName", defaultValue = "issue-details.csv", required = false) String detailsFileName,
       @RequestParam(value = "summaryFileName", defaultValue = "issue-summary.csv", required = false) String summaryFileName,
+      @RequestParam(value = "content", defaultValue = "", required = false) String content,
       @RequestParam("file") MultipartFile file
     ) throws ParseException, IOException {
         ValidatorParameters params = new ValidatorParameters();
@@ -56,13 +60,22 @@ public class App {
         params.setDefaultRecordType(defaultRecordType);
         params.setDetailsFileName(detailsFileName);
         params.setSummaryFileName(summaryFileName);
+        params.setCollectAllErrors(true);
 
         params.setDataSource(DataSource.STREAM);
-        params.setStream(file.getInputStream());
+        InputStream stream = null;
+        if (file != null)
+            stream = file.getInputStream();
+        else if (StringUtils.isNotBlank(content))
+            stream = new ByteArrayInputStream(content.getBytes());
+
+        if (stream != null)
+            params.setStream(file.getInputStream());
 
         Validator validator = new Validator(params);
         RecordIterator iterator = new RecordIterator(validator);
         iterator.start();
-        return String.format("validate!");
+
+        return String.format("validate!" + validator.getCounter());
     }
 }
