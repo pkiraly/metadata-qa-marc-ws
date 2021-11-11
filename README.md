@@ -31,7 +31,7 @@ curl -X POST \
      -F 'format=csv' \
      -F 'defaultRecordType=BOOKS' \
      -F file=@/path/to/records.mrc \
-     http://134.76.17.95/ws/validate
+     http://YOURSERVER/ws/validate
 ```
 
 Validate an alephseq file in with data elements defined in the Fennica catalogue:
@@ -46,7 +46,7 @@ curl -X POST \
      -F 'format=csv' \
      -F 'defaultRecordType=BOOKS' \
      -F file=@/path/to/records.alephseq \
-     http://134.76.17.95/ws/validate
+     http://YOURSERVER/ws/validate
 ```
 
 
