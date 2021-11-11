@@ -56,7 +56,7 @@ public class ValidatorController {
     return "form";
   }
 
-  @PostMapping("evaluate")
+  @PostMapping("/evaluate")
   public String validateHtml(
     @RequestParam(value = "marcVersion", defaultValue = "MARC21", required = false) String marcVersion,
     @RequestParam(value = "marcFormat", defaultValue = "XML", required = false) String marcFormat,
@@ -96,7 +96,7 @@ public class ValidatorController {
     return "result";
   }
 
-  @PostMapping("validate")
+  @PostMapping("/validate")
   public ResponseEntity<String> validateRest(
     @RequestParam(value = "marcVersion", defaultValue = "MARC21", required = false) String marcVersion,
     @RequestParam(value = "marcFormat", defaultValue = "XML", required = false) String marcFormat,
@@ -150,7 +150,7 @@ public class ValidatorController {
     params.setDetailsFileName(detailsFileName);
     params.setSummaryFileName(summaryFileName);
     params.setCollectAllErrors(true);
-    params.setOutputDir("/tmp");
+    params.setOutputDir("/tmp/ws");
 
     params.setDataSource(DataSource.STREAM);
     InputStream stream = null;
