@@ -111,6 +111,7 @@ public class ValidatorController {
     @RequestParam("file") MultipartFile file,
     Model model
   ) throws ParseException, IOException {
+    logger.info("validate");
     validate(marcVersion, marcFormat, details, trimId, summary, format, defaultRecordType, detailsFileName, summaryFileName, content, file, model);
     HttpHeaders responseHeaders = new HttpHeaders();
     responseHeaders.set("Baeldung-Example-Header", "Value-ResponseEntityBuilderWithHttpHeaders");
@@ -149,6 +150,7 @@ public class ValidatorController {
     params.setDetailsFileName(detailsFileName);
     params.setSummaryFileName(summaryFileName);
     params.setCollectAllErrors(true);
+    params.setOutputDir("/tmp");
 
     params.setDataSource(DataSource.STREAM);
     InputStream stream = null;

@@ -3,18 +3,25 @@
 This web service is a Java web application, which reads one or a small number of MARC records, analyses them, and 
 displays issues it found. This application is just a lightweight wrapper around the [QA catalogue](https://github.com/piraly/metadata-qa-marc). 
 
-The base address is
-https://YOURSERVER/ws
+At https://YOURSERVER/ws there is a web form.
 
-You can use the following parameters
+The REST API endpoint is available at https://YOURSERVER/ws/validate
 
-* `marcVersion` (optional, default: "MARC21")
-* `marcFormat` (optional, default value: "XML")
+You can use the following parameters:
+
+* `marcVersion` (optional, String, default: "MARC21")
+* `marcFormat` (optional, String, default value: "XML")
 * `details` (optional, boolean)
 * `trimId` (optional, boolean)
 * `summary` (optional, boolean)
-* `outputFormat` (optional, defaultValue = "csv")
-* `defaultRecordType` (optional, defaultValue = "BOOKS")
+* `outputFormat` (optional, String, defaultValue = "csv")
+* `defaultRecordType` (optional, String, defaultValue = "BOOKS")
+* `content` (optional, String) The MARC record(s) as a string
+* `file` (optional, file) The MARC record(s) in a file
+
+```
+```
+
 
 
 ## How to run
