@@ -3,6 +3,8 @@
 This web service is a Java web application, which reads one or a small number of MARC records, analyses them, and 
 displays issues it found. This application is just a lightweight wrapper around the [QA catalogue](https://github.com/piraly/metadata-qa-marc). 
 
+![Screenshot](https://pbs.twimg.com/media/FD6NolsXEAUtY0O?format=jpg&name=medium)
+
 At https://YOURSERVER/ws there is a web form.
 
 The REST API endpoint is available at https://YOURSERVER/ws/validate
