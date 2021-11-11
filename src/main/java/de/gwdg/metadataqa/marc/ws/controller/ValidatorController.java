@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
-public class ValidatorCOntroller {
+public class ValidatorController {
 
   private static final Logger logger = Logger.getLogger(Validator.class.getCanonicalName());
 
