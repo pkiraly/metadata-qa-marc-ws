@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -111,7 +112,11 @@ public class ValidatorController {
     @RequestParam("file") MultipartFile file,
     Model model
   ) throws ParseException, IOException {
-    logger.info("validate");
+    logger.info("/validate");
+    logger.info(
+      StringUtils.join(
+        new String[]{marcVersion, marcFormat, String.valueOf(details), String.valueOf(trimId), String.valueOf(summary), format,
+          defaultRecordType, detailsFileName, summaryFileName, content}, " -- "));
     validate(marcVersion, marcFormat, details, trimId, summary, format, defaultRecordType, detailsFileName, summaryFileName, content, file, model);
     HttpHeaders responseHeaders = new HttpHeaders();
     responseHeaders.set("Baeldung-Example-Header", "Value-ResponseEntityBuilderWithHttpHeaders");
@@ -136,6 +141,7 @@ public class ValidatorController {
                         MultipartFile file,
                         Model model
   ) throws ParseException, IOException {
+    logger.info("validate()");
     ValidatorParameters params = new ValidatorParameters();
     params.setMarcVersion(marcVersion);
     params.setMarcFormat(marcFormat);
@@ -151,6 +157,7 @@ public class ValidatorController {
     params.setSummaryFileName(summaryFileName);
     params.setCollectAllErrors(true);
     params.setOutputDir("/tmp/ws");
+    logger.info("/basic parameters");
 
     params.setDataSource(DataSource.STREAM);
     InputStream stream = null;
@@ -161,8 +168,11 @@ public class ValidatorController {
 
     if (stream != null)
       params.setStream(file.getInputStream());
+    logger.info("/set stream");
 
+    logger.info("new Validator()");
     Validator validator = new Validator(params);
+    logger.info("/new Validator()");
     RecordIterator iterator = new RecordIterator(validator);
     iterator.start();
 
@@ -200,5 +210,6 @@ public class ValidatorController {
       model.addAttribute("contentType", contentType);
       model.addAttribute("result", sb.toString());
     }
+    logger.info("/validate()");
   }
 }
