@@ -7,21 +7,47 @@ At https://YOURSERVER/ws there is a web form.
 
 The REST API endpoint is available at https://YOURSERVER/ws/validate
 
-You can use the following parameters:
+You can use the following parameters (see more details [here](https://github.com/pkiraly/metadata-qa-marc#validating-marc-records)):
 
-* `marcVersion` (optional, String, default: "MARC21")
-* `marcFormat` (optional, String, default value: "XML")
+* `marcVersion` (optional, String, default: "MARC21") MARC version. Other options: DNB, OCLC, GENT, SZTE, FENNICA, NKCR, BL, MARC21NO, UVA, B3KAT
+* `marcFormat` (optional, String, default value: "XML") The input file format. Other options: ISO, XML ALEPHSEQ, LINE_SEPARATED, MARC_LINE
 * `details` (optional, boolean)
 * `trimId` (optional, boolean)
 * `summary` (optional, boolean)
-* `outputFormat` (optional, String, defaultValue = "csv")
-* `defaultRecordType` (optional, String, defaultValue = "BOOKS")
+* `outputFormat` (optional, String, defaultValue = "csv") The output format. Other options: tsv, tab-separated, csv, comma-separated, text, txt, json
+* `defaultRecordType` (optional, String, defaultValue = "BOOKS") The record type to use if the record's own value is invalid. Other options: 
+    CONTINUING_RESOURCES, MUSIC, MAPS, VISUAL_MATERIALS, COMPUTER_FILES, MIXED_MATERIALS
 * `content` (optional, String) The MARC record(s) as a string
 * `file` (optional, file) The MARC record(s) in a file
 
+Validate a binary marc file in pure MARC21 schema:
 ```
+curl -X POST \
+     -F 'marcVersion=MARC21' \
+     -F 'marcFormat=ISO' \
+     -F 'details=false' \
+     -F 'trimId=false' \
+     -F 'summary=false' \
+     -F 'format=csv' \
+     -F 'defaultRecordType=BOOKS' \
+     -F file=@/path/to/records.mrc \
+     http://134.76.17.95/ws/validate
 ```
 
+Validate an alephseq file in with data elements defined in the Fennica catalogue:
+
+```
+curl -X POST \
+     -F 'marcVersion=MARC21' \
+     -F 'marcFormat=ALEPHSEQ' \
+     -F 'details=false' \
+     -F 'trimId=false' \
+     -F 'summary=false' \
+     -F 'format=csv' \
+     -F 'defaultRecordType=BOOKS' \
+     -F file=@/path/to/records.alephseq \
+     http://134.76.17.95/ws/validate
+```
 
 
 ## How to run
@@ -29,6 +55,16 @@ You can use the following parameters:
 This webservice can be launched in two ways. At the end of the process the service will be accessible from port 8080 
 (so as http://localhost:8080/ws and http://YOURSERVER:8080/ws)
 
+For the time being the service creates some temporary files. Please create a directory, which is writable to the user 
+who runs the process (e.g. if you run the application in Tomcat, it is Tomcat user).
+
+```
+sudo mkdir /tmp/ws
+sudo chown Tomcat /tmp/ws
+sudo chmod u+w /tmp/ws
+```
+
+(Later the directory will be configurable, but now it is not. Sorry for the inconvenience.)
 
 ### 1. Run in a standalone Spring Boot web server
 ```
