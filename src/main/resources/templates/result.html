@@ -51,7 +51,7 @@
                 th:if="${!error.marcPath.equals(error.message)}"></span>
         </td>
         <td>
-          <a th:attr="href=@{error.url}" th:text="${error.url}" th:if="${error.url != null}"></a>
+          <a th:attr="href=${error.url}" th:text="${error.url}" th:if="${error.url != null}"></a>
         </td>
       </tr>
     </tbody>
