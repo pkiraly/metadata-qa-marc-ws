@@ -171,10 +171,10 @@ public class ValidatorController {
 
     params.setDataSource(DataSource.STREAM);
     InputStream stream = null;
-    if (file != null)
-      stream = file.getInputStream();
-    else if (StringUtils.isNotBlank(content))
+    if (StringUtils.isNotBlank(content))
       stream = new ByteArrayInputStream(content.getBytes());
+    else if (file != null)
+      stream = file.getInputStream();
 
     if (stream != null)
       params.setStream(stream);
