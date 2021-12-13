@@ -1,7 +1,7 @@
 # QA Catalogue web service
 
 This web service is a Java web application, which reads one or a small number of MARC records, analyses them, and 
-displays issues it found. This application is just a lightweight wrapper around the [QA catalogue](https://github.com/piraly/metadata-qa-marc). 
+displays issues it found. This application is just a lightweight wrapper around the [QA catalogue](https://github.com/pkiraly/metadata-qa-marc). 
 
 ![Screenshot](https://pbs.twimg.com/media/FD6NolsXEAUtY0O?format=jpg&name=medium)
 
