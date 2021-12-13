@@ -70,19 +70,10 @@ public class ValidatorController {
     @RequestParam(value = "summaryFileName", defaultValue = "issue-summary.csv", required = false) String summaryFileName,
     @RequestParam(value = "content", defaultValue = "", required = false) String content,
     @RequestParam("file") MultipartFile file,
-    @RequestParam Map<String,String> allRequestParams,
     Model model
   ) {
     logger.info("EVALUATE: summary; " + summary);
     logger.info("/evaluate");
-    logger.info("params: " + StringUtils.join(allRequestParams.keySet(), ", "));
-    logger.info("file name: " + file.getName());
-    try {
-      logger.info("file stream null? " + (file.getInputStream() == null));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    logger.info("content: " + (StringUtils.isNotBlank(content)));
     model.addAttribute("marcVersion", marcVersion);
     model.addAttribute("marcFormat", marcFormat);
     model.addAttribute("details", details);
@@ -122,9 +113,6 @@ public class ValidatorController {
     Model model
   ) throws ParseException, IOException {
     logger.info("validate: " + marcFormat);
-    logger.info("file name: " + file.getName());
-    logger.info("file stream null? " + (file.getInputStream() == null));
-    logger.info("content: " + (StringUtils.isNotBlank(content)));
     validate(marcVersion, marcFormat, details, trimId, summary, format, defaultRecordType, detailsFileName, summaryFileName, content, file, model);
     HttpHeaders responseHeaders = new HttpHeaders();
     responseHeaders.set("Baeldung-Example-Header", "Value-ResponseEntityBuilderWithHttpHeaders");
@@ -152,9 +140,7 @@ public class ValidatorController {
     logger.info("validate()");
     ValidatorParameters params = new ValidatorParameters();
     params.setMarcVersion(marcVersion);
-    logger.info("setMarcFormat: " + marcFormat);
     params.setMarcFormat(marcFormat);
-    logger.info("getMarcFormat: " + params.getMarcFormat());
     params.setDoDetails(details);
     params.setTrimId(trimId);
     params.setDoSummary(summary);
