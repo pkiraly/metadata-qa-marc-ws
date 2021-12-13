@@ -177,7 +177,7 @@ public class ValidatorController {
       stream = new ByteArrayInputStream(content.getBytes());
 
     if (stream != null)
-      params.setStream(file.getInputStream());
+      params.setStream(stream);
 
     Validator validator = new Validator(params);
     RecordIterator iterator = new RecordIterator(validator);
