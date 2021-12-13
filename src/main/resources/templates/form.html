@@ -89,8 +89,8 @@
             <label class="form-check-label" for="MARC_LINE">MARC Line (text based, each line contains one field)</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="marcFormat" id="MARC_MAKER" value="MARC_MAKER" th:checked="${marcFormat == 'MARC_MAKER'}" />
-            <label class="form-check-label" for="MARC_MAKER">MARCMaker (another text based format, each field starts in new lines beginning with '=' characters)</label>
+            <input class="form-check-input" type="radio" name="marcFormat" id="MARCMAKER" value="MARCMAKER" th:checked="${marcFormat == 'MARCMAKER'}" />
+            <label class="form-check-label" for="MARCMAKER">MARCMaker (another text based format, each field starts in new lines beginning with '=' characters)</label>
           </div>
           <p style="color: #999">For serialization formats see <a href="https://jorol.github.io/processing-marc/#/serializations">MARC 21 serializations</a> section of
             Johann Rolschewski's <em>Processing MARC 21 with open source tools</em>.</p>
