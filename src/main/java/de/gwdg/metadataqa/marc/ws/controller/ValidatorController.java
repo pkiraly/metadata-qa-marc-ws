@@ -22,6 +22,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 @Controller
@@ -69,10 +70,12 @@ public class ValidatorController {
     @RequestParam(value = "summaryFileName", defaultValue = "issue-summary.csv", required = false) String summaryFileName,
     @RequestParam(value = "content", defaultValue = "", required = false) String content,
     @RequestParam("file") MultipartFile file,
+    @RequestParam Map<String,String> allRequestParams,
     Model model
   ) {
     logger.info("EVALUATE: summary; " + summary);
     logger.info("/evaluate");
+    logger.info("params: " + StringUtils.join(allRequestParams.keySet(), ", "));
     logger.info("file name: " + file.getName());
     try {
       logger.info("file stream null? " + (file.getInputStream() == null));
