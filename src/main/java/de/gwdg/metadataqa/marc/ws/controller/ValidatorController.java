@@ -136,9 +136,12 @@ public class ValidatorController {
                         MultipartFile file,
                         Model model
   ) throws ParseException, IOException {
+    logger.info("validate()");
     ValidatorParameters params = new ValidatorParameters();
     params.setMarcVersion(marcVersion);
+    logger.info("setMarcFormat: " + marcFormat);
     params.setMarcFormat(marcFormat);
+    logger.info("getMarcFormat: " + params.getMarcFormat());
     params.setDoDetails(details);
     params.setTrimId(trimId);
     params.setDoSummary(summary);
