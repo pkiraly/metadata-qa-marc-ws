@@ -151,6 +151,7 @@ public class ValidatorController {
     params.setSummaryFileName(summaryFileName);
     params.setCollectAllErrors(true);
     params.setOutputDir("/tmp/ws");
+    params.setLimit(100);
 
     params.setDataSource(DataSource.STREAM);
     InputStream stream = null;
