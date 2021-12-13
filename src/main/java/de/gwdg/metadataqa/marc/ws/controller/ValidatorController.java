@@ -73,6 +73,13 @@ public class ValidatorController {
   ) {
     logger.info("EVALUATE: summary; " + summary);
     logger.info("/evaluate");
+    logger.info("file name: " + file.getName());
+    try {
+      logger.info("file stream null? " + (file.getInputStream() == null));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    logger.info("content: " + (StringUtils.isNotBlank(content)));
     model.addAttribute("marcVersion", marcVersion);
     model.addAttribute("marcFormat", marcFormat);
     model.addAttribute("details", details);
