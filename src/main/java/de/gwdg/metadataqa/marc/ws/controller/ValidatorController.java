@@ -112,6 +112,9 @@ public class ValidatorController {
     Model model
   ) throws ParseException, IOException {
     logger.info("validate: " + marcFormat);
+    logger.info("file name: " + file.getName());
+    logger.info("file stream null? " + (file.getInputStream() == null));
+    logger.info("content: " + (StringUtils.isNotBlank(content)));
     validate(marcVersion, marcFormat, details, trimId, summary, format, defaultRecordType, detailsFileName, summaryFileName, content, file, model);
     HttpHeaders responseHeaders = new HttpHeaders();
     responseHeaders.set("Baeldung-Example-Header", "Value-ResponseEntityBuilderWithHttpHeaders");
